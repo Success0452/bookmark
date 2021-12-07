@@ -61,7 +61,7 @@ class BookmarkListItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(bookmark.title, style: Theme.of(context).textTheme.headline1,),
+          Text(bookmark.title, style: Theme.of(context).textTheme.headline6,),
           const SizedBox(height: 6,),
           Text(bookmark.link, style: Theme.of(context).textTheme.subtitle1,),
         ],
