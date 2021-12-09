@@ -1,4 +1,5 @@
 
+import 'package:bookmark/widget/bookmark_list_title_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../model/bookmark.dart';
@@ -10,11 +11,11 @@ class BookmarksListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        BookmarkListItemWidget(bookmarksList[0]),
-        BookmarkListItemWidget(bookmarksList[1]),
-      ],
+    return ListView.builder(
+      itemCount: bookmarksList.length,
+      itemBuilder: (BuildContext context, int index){
+       return BookmarkListItemWidget(bookmarksList[index]);
+      },
     );
   }
 }

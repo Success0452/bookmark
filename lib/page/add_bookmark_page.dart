@@ -1,3 +1,4 @@
+import 'package:bookmark/model/bookmark.dart';
 import 'package:flutter/material.dart';
 
 class AddBookPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
               Scaffold.of(context).hideCurrentSnackBar();
               if(isInputValid(title, link)){
-
+                Navigator.pop(context, Bookmark(title, link));
               }else{
                 showInputError(context, title, link);
               }

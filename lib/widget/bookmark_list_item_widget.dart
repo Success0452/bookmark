@@ -1,13 +1,12 @@
 
-import 'package:bookmark/page/view_bookmark_page.dart';
 import 'package:bookmark/util/navigation_util.dart';
 import 'package:flutter/material.dart';
 
 import '../model/bookmark.dart';
 
 class BookmarkListItemWidget extends StatelessWidget {
-  Bookmark bookmark;
-  BookmarkListItemWidget(this.bookmark, {Key? key}) : super(key: key);
+ final Bookmark bookmark;
+  const BookmarkListItemWidget(this.bookmark, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
