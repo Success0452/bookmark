@@ -30,11 +30,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   webview_flutter: ^2.7.0
+  intl: ^0.17.0
+  optional: ^6.1.0+1
+  stacked: ^2.2.7
+  stacked_services: ^0.8.15
+  faunadb_data: ^0.0.6
+
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +51,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  build_runner: ^2.1.5
+  stacked_generator: ^0.5.6
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
