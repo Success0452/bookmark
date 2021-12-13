@@ -1,5 +1,7 @@
 import 'package:bookmark/model/bookmark.dart';
+import 'package:bookmark/page/add_bookmark_page_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
 class AddBookPage extends StatefulWidget {
 
@@ -18,59 +20,65 @@ class _AddBookPageState extends State<AddBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Add Bookmark Page"),),
-      floatingActionButton: Builder(
-        builder: (BuildContext context) {
-          return FloatingActionButton(
-            child: const Icon(Icons.check),
-            backgroundColor: Colors.green,
-            onPressed: () {
-              String title = _titleTextFieldController.text;
-              String link = _linkTextFieldController.text;
+    return ViewModelBuilder<AddBookmarkViewModel>.reactive(
+        viewModelBuilder: () => AddBookmarkViewModel(),
+        // onModelReady: (viewModel) => viewModel.setUp(),
+        builder: (context, viewModel, child){
+          return Scaffold(
+            appBar: AppBar(title: const Text("Add Bookmark Page"),),
+            floatingActionButton: Builder(
+                builder: (BuildContext context) {
+                  return FloatingActionButton(
+                    child: const Icon(Icons.check),
+                    backgroundColor: Colors.green,
+                    onPressed: () {
+                      String title = _titleTextFieldController.text;
+                      String link = _linkTextFieldController.text;
 
-              Scaffold.of(context).hideCurrentSnackBar();
-              if(isInputValid(title, link)){
-                Navigator.pop(context, Bookmark(title, link));
-              }else{
-                showInputError(context, title, link);
-              }
-            },
+                      Scaffold.of(context).hideCurrentSnackBar();
+                      if(isInputValid(title, link)){
+                        Navigator.pop(context, Bookmark(title, link));
+                      }else{
+                        showInputError(context, title, link);
+                      }
+                    },
+                  );
+                }
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _titleTextFieldController,
+                    textInputAction: TextInputAction.next,
+                    autofocus: true,
+                    onFieldSubmitted: (textInput) {
+                      FocusScope.of(context).requestFocus(_linkFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                        icon: Icon(Icons.title),
+                        labelText: "Title",
+                        hintText: "Title of the bookmark",
+                        border: OutlineInputBorder()
+                    ),
+                  ),
+                  const SizedBox(height: 16.0,),
+                  TextFormField(
+                    focusNode: _linkFocusNode,
+                    controller: _linkTextFieldController,
+                    decoration: const InputDecoration(
+                        icon: Icon(Icons.link),
+                        labelText: "URL",
+                        hintText: "Webpage link",
+                        border: OutlineInputBorder()
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
-        }
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _titleTextFieldController,
-              textInputAction: TextInputAction.next,
-              autofocus: true,
-              onFieldSubmitted: (textInput) {
-                FocusScope.of(context).requestFocus(_linkFocusNode);
-              },
-              decoration: const InputDecoration(
-                icon: Icon(Icons.title),
-                labelText: "Title",
-                hintText: "Title of the bookmark",
-                border: OutlineInputBorder()
-              ),
-            ),
-            const SizedBox(height: 16.0,),
-            TextFormField(
-              focusNode: _linkFocusNode,
-              controller: _linkTextFieldController,
-              decoration: const InputDecoration(
-                  icon: Icon(Icons.link),
-                  labelText: "URL",
-                  hintText: "Webpage link",
-                  border: OutlineInputBorder()
-              ),
-            ),
-          ],
-        ),
-      ),
+        },
     );
   }
 
